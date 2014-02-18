@@ -89,7 +89,7 @@ Turn the Pi back on and log in.
 
 ##Step 3: Test the PIR motion sensor
 
-We're going to use the Python programming language to write some code that will detect movement and print out some text.  When movement is detected the PIR motion sensor applies power to its OUT pin which we have connected to GPIO pin 7 on the Pi.  So in our code we just need to continually check pin 7 to see if it has power or not.
+We're going to use the Python programming language to write some code that will detect movement and print out some text (we can extend the program to involve the Camera Board later on).  When movement is detected the PIR motion sensor applies power to its OUT pin which we have connected to GPIO pin 7 on the Pi.  So in our code we just need to continually check pin 7 to see if it has power or not.
 
 If a pin has power we call this **HIGH** and if not we call it **LOW**.
 
