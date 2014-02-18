@@ -148,3 +148,159 @@ Press `Ctrl – C` when you want to exit.
 ![image](./images/pir_potentiometers.png "PIR potentiometers")
 
 On the PIR module you should have two orange coloured components that look like they take a phillips screwdriver (see above).  These things are called *potentiometers* and they allow you to adjust the sensitivity of the sensor and the detection time.  I would suggest to have sensitivity set to max and time to min, the choice is yours though.
+
+##Step 4: Setting up the Camera Board
+
+Follow the official instructions [here](http://www.raspberrypi.org/camera "Camera | Raspberry Pi") to setup and test the Raspberry Pi Camera Board.  Stop once you have successfully used a few of the example commands.
+
+Next, if you have it, set up the 360 Gooseneck Mount.  This will allow you to aim the camera at the right part of the room.  One end of it inserts into the headphone jack on the Pi (it just uses this to hold itself and does nothing to the audio jack), the other end is a screw with a couple of plastic washers that secure the camera board to the gooseneck.
+
+You should then have something a bit like this below.  Please note the [red](http://mall.egoman.com.cn/index.php?option=com_content&view=article&id=75&Itemid=218 "Raspberry Pi树莓") Raspberry Pi is not available outside of China, Hong Kong and Taiwan.
+
+![image](./images/pir_camera_board_pi.jpg "PIR with Camera Board")
+
+If you have not done so already test the camera is working using the following command.
+
+`raspivid -t 0`
+
+Press `Ctrl - C` to exit.
+
+##Step 5: Install the picamera Python module
+
+To control the Camera Board using the Python programming language we need to install a module called [picamera](http://picamera.readthedocs.org "Documentation for picamera").  Use the following commands to do this at the Linux prompt.
+
+```
+sudp apt-get update
+sudo apt-get install python-picamera
+```
+
+This will take a minute or two to complete.
+
+##Step 6: Program the camera to preview on movement
+
+Okay now we're ready to extend our previous program to give it the ability to control the Camera Board.  To start with let's just make our program display what the camera can see when movement is detected and we can set up recording to file later.
+
+Make a copy of the previous program and we'll use that.
+
+`cp pirtest.py pirCamera.py`
+
+Now use the following command to edit the file.
+
+`nano pirCamera.py`
+
+We first need to add the `import picamera` statement at the top, this allows your program to access the premade code which can control the Camera Board.  We then declare the camera object `cam`, this provides all the camera control functions that we need to use.  Then inside the `while` loop where we print the **HIGH** or **LOW** message, we can test to see if `currState` is HIGH / True (meaning movement is detected) and start or stop the camera preview accordingly.
+
+Either modify manually or copy and paste the code below.
+
+```python
+#!/usr/bin/python
+import RPi.GPIO as GPIO
+import time
+import picamera #new
+
+sensorPin = 7
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+prevState = False
+currState = False
+
+cam = picamera.PiCamera() #new
+
+while True:
+    time.sleep(.1)
+    prevState = currState
+    currState = GPIO.input(sensorPin)
+    if currState != prevState:
+        print "GPIO pin {0} is {1}".format(sensorPin, "HIGH" if currState else "LOW")
+        if currState: #new
+            cam.start_preview()
+        else:
+            cam.stop_preview()
+```
+
+Press `Ctrl - O` to save and `Ctrl - X` to quit.  To run the program use the following command.
+
+`sudo ./pirCamera.py`
+
+Press `Ctrl – C` when you want to exit.
+
+##Step 6: Recording to file and playing back from file
+
+We can just add a tiny bit more code to allow us to record to file for playback at a later stage.  Ideally if there are many intruders in your room then you want to capture them all and not just the most recent one.  So to do that we need a way to automatically generate a new file name each time movement is detected.  The easiest and safest way to do this is to make a file name out of the date and time.
+
+For example if the time now was the 11th of Feb 2014 at 10:24 AM and 18 seconds the file name would be something like this: `2014-02-11_10.24.18.h264`.  This uses the format of `YEAR-MONTH-DAY_HOUR.MINUTE.SECOND.h264`, the h264 part is the format the video will be recorded in.  It's the same format used by YouTube.
+
+To do this we need to import the `datetime` Python module and write a function to generate the filename.  See `getFileName` below, this uses the *string from time* function to insert the values from the current time into the specified string format.  It's then just a matter of using the commands to start and stop the recording using the generated file name.  These should happen at the same time as the preview commands respectively.
+
+`nano pirCamera.py`
+
+Either modify manually or copy and paste the code below.
+
+```python
+#!/usr/bin/python
+import RPi.GPIO as GPIO
+import time
+import picamera
+import datetime #new
+
+def getFileName(): #new
+    return datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S.h264")
+
+sensorPin = 7
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+prevState = False
+currState = False
+
+cam = picamera.PiCamera()
+
+while True:
+    time.sleep(.1)
+    prevState = currState
+    currState = GPIO.input(sensorPin)
+    if currState != prevState:
+        print "GPIO pin {0} is {1}".format(sensorPin, "HIGH" if currState else "LOW")
+        if currState:
+            fileName = getFileName()
+            cam.start_preview()
+            cam.start_recording(fileName) #new
+        else:
+            cam.stop_preview()
+            cam.stop_recording() #new
+```
+
+Press `Ctrl - O` to save and `Ctrl - X` to quit.  To run the program use the following command.
+
+`sudo ./pirCamera.py`
+
+Press `Ctrl – C` when you want to exit.
+
+###Playback
+
+If you now use the `ls` command you should see that a few files have been generated.  You can use the following command to play back a file.  Replace `<file>` with the filename you wish to play.
+
+`omxplayer <file> -o hdmi`
+
+For example: `omxplayer 2014-02-11_10.24.18.h264 -o hdmi`
+
+##Step 7: Stealth mode
+
+You have probably noticed the red LED on the camera board come on when you start your Python program.  This will be quite noticeable to any would be intruder and it's a good idea to disable it.  This can be done by editing the Raspberry Pi configuration file.  Enter the command below.
+
+`sudo nano /boot/config.txt`
+
+Add the following line to the end of the file.
+
+`disable_camera_led=1`
+
+Press `Ctrl - O` to save and `Ctrl - X` to quit.  The changes will only take effect after a reboot.
+
+`sudo reboot`
+
+If you want to leave a monitor turned on you can just comment out the lines that start and stop the camera preview and even the *print GPIO pin is* line if desired.  Use the `#` sign at the start of a line to disable it.
+
+Now all you have to do is set the trap and wait, good luck!
