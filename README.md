@@ -287,6 +287,10 @@ If you now use the `ls` command you should see that a few files have been genera
 
 For example: `omxplayer 2014-02-11_10.24.18.h264 -o hdmi`
 
+**Tip**: Use the `TAB` key for auto complete.
+
+![image](./images/tabkey.jpg "TAB Key")
+
 ##Step 8: Stealth mode
 
 You have probably noticed the red LED on the camera board come on when you start your Python program.  This will be quite noticeable to any would be intruder and it's a good idea to disable it.  This can be done by editing the Raspberry Pi configuration file.  Enter the command below.
