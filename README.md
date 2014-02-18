@@ -226,7 +226,7 @@ Press `Ctrl - O` to save and `Ctrl - X` to quit.  To run the program use the fol
 
 Press `Ctrl – C` when you want to exit.
 
-##Step 6: Recording to file and playing back from file
+##Step 7: Recording to file and playing back
 
 We can just add a tiny bit more code to allow us to record to file for playback at a later stage.  Ideally if there are many intruders in your room then you want to capture them all and not just the most recent one.  So to do that we need a way to automatically generate a new file name each time movement is detected.  The easiest and safest way to do this is to make a file name out of the date and time.
 
@@ -287,7 +287,7 @@ If you now use the `ls` command you should see that a few files have been genera
 
 For example: `omxplayer 2014-02-11_10.24.18.h264 -o hdmi`
 
-##Step 7: Stealth mode
+##Step 8: Stealth mode
 
 You have probably noticed the red LED on the camera board come on when you start your Python program.  This will be quite noticeable to any would be intruder and it's a good idea to disable it.  This can be done by editing the Raspberry Pi configuration file.  Enter the command below.
 
