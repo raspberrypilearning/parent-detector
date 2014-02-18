@@ -77,11 +77,74 @@ This should ideally be connected with the Raspberry Pi turned off for safety.  U
 
 `sudo halt`
 
-Wait for the ACT (activity) LED to stop blinking before turning off the power.
+Wait for the ACT (activity) LED to stop blinking before turning off the power.  Follow the instructions below to connect the PIR module to the Raspberry Pi.
 
 ![image](./images/pir_wiring.png "PIR to Pi wiring diagram")
 
 Refer to the diagram above for pin numbers.  If you look closely at the pins on your PIR module you’ll see some white text on the PCB near the base of each one.  `VCC` is for +5 volts input.  Take one of the **female** to **female** jumpers and connect the VCC pin to pin 2 (red) on the Pi, this will make the Pi give 5 volts of power to the PIR module.  Use another jumper to connect `GND` on the module to pin 6 (black) on the Pi, this completes the circuit and allows current to flow back out of the module into ground.  Now do the same for the sensor pin `OUT`, you can use any of the green pins on the Pi for this but I am going to use pin number 7 (since it’s the first general purpose one).
 
-Note: If you have a different PIR module to our one then your pin layout might be different, this is why I refer you to the labels `VCC`, `GND` and `OUT`.
+**Note**: If you have a different PIR module to our one then your pin layout might be different, this is why I refer you to the labels `VCC` `GND` and `OUT`.
 
+Turn the Pi back on and log in.
+
+##Step 3: Test the PIR motion sensor
+
+We're going to use the Python programming language to write some code that will detect movement and print out some text.  When movement is detected the PIR motion sensor applies power to its OUT pin which we have connected to GPIO pin 7 on the Pi.  So in our code we just need to continually check pin 7 to see if it has power or not.
+
+If a pin has power we call this **HIGH** and if not we call it **LOW**.
+
+The program is pretty simple.  We're first setting up the Raspberry Pi GPIO pins to allow us to use pin number 7 as an input (so it can detect when the PIR module sends power).  We need to continually check the pin for any changes so a `while True` loop is used for this.  This is an infinite loop so the program will just run forever unless we stop it manually with `Ctrl - C`.
+
+We then use two Boolean (True or False) variables for the previous state and the current state of the pin, the previous state being what the current state was the previous time around the loop.  Inside the loop we compare the previous state to the current state to detect when they're different.  We don't want to keep displaying a message if there has been no change.
+
+Firstly create a blank Python file with the following command.
+
+`nano pirtest.py`
+
+Enter or copy and paste the code below.
+
+```python
+#!/usr/bin/python
+import RPi.GPIO as GPIO
+import time
+
+sensorPin = 7
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+prevState = False
+currState = False
+
+while True:
+    time.sleep(.1)
+    prevState = currState
+    currState = GPIO.input(sensorPin)
+    if currState != prevState:
+        print "GPIO pin {0} is {1}".format(sensorPin, "HIGH" if currState else "LOW")
+```
+
+Press `Ctrl - O` to save and `Ctrl - X` to quit.
+
+Next make the Python file executable and then you can run it.
+
+```
+chmod +x pirtest.py
+sudo ./pirtest.py
+```
+
+If you get an error saying `RuntimeError: No access to /dev/mem` it means you forgot to use `sudo`.  You must run programs that access the GPIO as root and `sudo` does this for you.  Think of it as super-user-do.  
+
+If you start moving or waving it will go HIGH.  Keep on waving and it will stay HIGH and only go back to LOW if you keep still again.  If this is what you have then everything is working correctly.  If not then something is wrong and you need to go back and troubleshoot.
+
+```
+GPIO pin 7 is HIGH
+GPIO pin 7 is LOW
+GPIO pin 7 is HIGH
+```
+
+Press `Ctrl – C` when you want to exit.
+
+![image](./images/pir_potentiometers.png "PIR potentiometers")
+
+On the PIR module you should have two orange coloured components that look like they take a phillips screwdriver (see above).  These things are called *potentiometers* and they allow you to adjust the sensitivity of the sensor and the detection time.  I would suggest to have sensitivity set to max and time to min, the choice is yours though.
