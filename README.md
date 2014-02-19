@@ -287,7 +287,7 @@ If you now use the `ls` command you should see that a few files have been genera
 
 For example: `omxplayer 2014-02-11_10.24.18.h264 -o hdmi`
 
-**Tip**: Use the `TAB` key for auto complete.
+**Tip**: Use the `TAB` key for auto complete when typing in Linux commands or file names.
 
 ![image](./images/tabkey.jpg "TAB Key")
 
