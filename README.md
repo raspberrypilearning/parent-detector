@@ -305,6 +305,8 @@ Press `Ctrl - O` to save and `Ctrl - X` to quit.  The changes will only take eff
 
 `sudo reboot`
 
-If you want to leave a monitor turned on you can just comment out the lines that start and stop the camera preview and even the *print GPIO pin is* line if desired.  Use the `#` sign at the start of a line to disable it.
+If you want to leave the monitor connected and turned on while the program is running it’s a good idea to edit the Python code to disable the camera *preview* lines.  Use the `#` sign at the start of a line to disable it.
+
+Another trick you can do is to start your Python program under a different login.  To do this press `ALT - F2` before you log in.  This will show you a new login prompt, login there and start the Python program.  Now if you press `ALT - F1` to go back to the usual login prompt it will appear as though the Raspberry Pi is innocently waiting for someone to log in.  
 
 Now all you have to do is set the trap and wait, good luck!
