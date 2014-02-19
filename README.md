@@ -265,7 +265,7 @@ while True:
     if currState != prevState:
         print "GPIO pin {0} is {1}".format(sensorPin, "HIGH" if currState else "LOW")
         if currState:
-            fileName = getFileName()
+            fileName = getFileName() #new
             cam.start_preview()
             cam.start_recording(fileName) #new
         else:
