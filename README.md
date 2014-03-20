@@ -8,21 +8,25 @@ How to use a Raspberry Pi to detect who's been in your room.
 A Raspberry Pi is so small that it can easily be hidden; that makes it the perfect tool for this kind of project.  The basic idea is to use motion detection to trigger video recording via the Raspberry Pi Camera Board.  You can then leave the Pi hidden in your room and see who's been caught on camera when you get home from school.
 
 ##Lesson objectives
+
 * Understand a Passive Infra Red motion sensor
 * Understand how to use the `picamera` Python module
 * Understand how to record videos
 * Understand how to play back videos
 
 ##Lesson outcomes
+
 *	To have built and tested a Raspberry Pi parent detector
 *	Caught someone on camera
 *	Gained experience in Python programming
 *	Gained experience using the Raspberry Pi GPIO pins
 
 ##Time required
+
 *	1-2 hours
 
 ##Requirements
+
 *	Raspberry Pi
 *	Micro USB power adaptor
 *	An SD card with Raspbian already set up through NOOBS
@@ -35,6 +39,7 @@ A Raspberry Pi is so small that it can easily be hidden; that makes it the perfe
 *	**Female** to **female** jumper wires, at least 3 (try [eBay](http://search.ebay.co.uk/female+to+female+jumper+wires+solderless "eBay search"))
 
 ###Recommended
+
 *	Camera Board 360 Gooseneck Mount (from [modmypi.com](https://www.modmypi.com/flexible-camera-mount "ModMyPi | RPi Camera Board 360 Gooseneck Mount"))
 
 ##Introduction: what is a PIR module?
@@ -48,6 +53,7 @@ The sensor is regarded as passive because it doesn’t send out any signal in or
 We don’t need to worry about its inner workings.  What we’re interested in are the three pins on it; we can connect those to the Raspberry Pi GPIO pins.  One pin is for +5 volts, one pin is for ground and the other is the sensor pin (the middle pin on our Pi).  This sensor pin will receive power whenever motion is detected by the PIR module.  We can then see that happening on the Raspberry Pi and take action accordingly.
 
 ## Step 0: Setting Up your Pi
+
 First check that you have all the parts you need to get your Raspberry Pi set up and working.
 
 - Raspberry Pi
