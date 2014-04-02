@@ -1,6 +1,5 @@
 #A Raspberry Pi Parent Detector
 
-
 How to use a Raspberry Pi to detect who's been in your room.
 
 ![](./images/cover.jpg "Cover Image")
@@ -66,8 +65,8 @@ First check that you have all the parts you need to get your Raspberry Pi set up
 
 ###Activity Checklist
 
-1.	Place the SD card into the slot of your Raspberry Pi. It will only fit one way so be careful not to break the card. 
-2.	Next connect the HDMI cable from the monitor (or TV) to the HDMI port on the Pi and turn on your monitor. 
+1.	Place the SD card into the slot of your Raspberry Pi. It will only fit one way so be careful not to break the card.
+2.	Next connect the HDMI cable from the monitor (or TV) to the HDMI port on the Pi and turn on your monitor.
 3.	Plug the USB keyboard and mouse into the USB ports on the Pi.
 4.	Plug in the micro USB power supply and you should see some text appear on your screen.
 5.  When prompted to login type:
@@ -139,7 +138,7 @@ chmod +x pirtest.py
 sudo ./pirtest.py
 ```
 
-If you get an error saying `RuntimeError: No access to /dev/mem` it means you forgot to use `sudo`.  You must run programs that access the GPIO as root and `sudo` does this for you; to help remember you can think of it as 'super-user-do'.  
+If you get an error saying `RuntimeError: No access to /dev/mem` it means you forgot to use `sudo`.  You must run programs that access the GPIO as root and `sudo` does this for you; to help remember you can think of it as 'super-user-do'.
 
 If you start moving or waving the sensor pin will go HIGH.  Keep on waving and it will stay HIGH, and only go back to LOW if you keep still again.  If you see the sensor behave like this, then everything is working correctly.  If not, something is wrong and you need to go back and troubleshoot.
 
@@ -313,6 +312,16 @@ Press `Ctrl - O` to save and `Ctrl - X` to quit.  The changes will only take eff
 
 If you want to leave the monitor connected and turned on while the program is running, it’s a good idea to edit the Python code to disable the camera *preview* lines.  Use the `#` sign at the start of a line to disable it.
 
-Another trick you can do is to start your Python program under a different login.  To do this press `ALT - F2` before you log in; this will show you a new login prompt, so log in there and start the Python program.  Now if you press `ALT - F1` to go back to the usual login prompt, it will appear as though the Raspberry Pi is innocently waiting for someone to log in.  
+Another trick you can do is to start your Python program under a different login.  To do this press `ALT - F2` before you log in; this will show you a new login prompt, so log in there and start the Python program.  Now if you press `ALT - F1` to go back to the usual login prompt, it will appear as though the Raspberry Pi is innocently waiting for someone to log in.
 
 Now all you have to do is set the trap and wait. Good luck!
+
+## Licence
+
+Unless otherwise specified, everything in this repository is covered by the following licence:
+
+![Creative Commons License](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)
+
+***Parent Detector*** by the [Raspberry Pi Foundation](http://raspberrypi.org) is licenced under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+
+Based on a work at https://github.com/raspberrypilearning/parent-detector
