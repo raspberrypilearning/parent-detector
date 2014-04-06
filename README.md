@@ -26,20 +26,15 @@ A Raspberry Pi is so small that it can easily be hidden; that makes it the perfe
 
 ## Requirements
 
-- Raspberry Pi
-- Micro USB power adaptor
-- An SD card with Raspbian already set up through NOOBS
-- USB keyboard
-- USB mouse
-- HDMI cable
-- A monitor or TV
-- Raspberry Pi Camera Board
+As well as your Raspberry Pi and all its standard peripherals, you'll need:
+
+- Raspberry Pi Camera Module
 - PIR motion sensor module (try [eBay](http://search.ebay.co.uk/pir+motion+sensor+module))
 - **Female-to-female** jumper wires, at least 3 (try [eBay](http://search.ebay.co.uk/female+to+female+jumper+wires+solderless))
 
 ### Recommended
 
-- Camera Board 360 Gooseneck Mount (from [modmypi.com](https://www.modmypi.com/flexible-camera-mount))
+- Camera Board 360 Gooseneck Mount (from [modmypi.com](https://www.modmypi.com/flexible-camera-mount)) or equivalent
 
 ## Introduction: what is a PIR module?
 
@@ -61,7 +56,7 @@ Refer to the diagram above for pin numbers. If you look closely at the pins on y
 
 **Note**: If you have a different PIR module to the one pictured then your pin layout might be different; this is why I include the labels `VCC` `GND` and `OUT`.
 
-Turn the Pi back on and log in.
+Now boot your Pi and log in.
 
 ## Step 2: Test the PIR motion sensor
 
@@ -94,7 +89,7 @@ prevState = False
 currState = False
 
 while True:
-    time.sleep(.1)
+    time.sleep(0.1)
     prevState = currState
     currState = GPIO.input(sensorPin)
     if currState != prevState:
@@ -192,7 +187,7 @@ currState = False
 cam = picamera.PiCamera()  # new
 
 while True:
-    time.sleep(.1)
+    time.sleep(0.1)
     prevState = currState
     currState = GPIO.input(sensorPin)
     if currState != prevState:
@@ -246,7 +241,7 @@ currState = False
 cam = picamera.PiCamera()
 
 while True:
-    time.sleep(.1)
+    time.sleep(0.1)
     prevState = currState
     currState = GPIO.input(sensorPin)
     if currState != prevState:
