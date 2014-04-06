@@ -98,7 +98,8 @@ while True:
     prevState = currState
     currState = GPIO.input(sensorPin)
     if currState != prevState:
-        print "GPIO pin {0} is {1}".format(sensorPin, "HIGH" if currState else "LOW")
+        newState = "HIGH" if currState else "LOW"
+        print "GPIO pin %s is %s" % (sensorPin, newState)
 ```
 
 Press `Ctrl + O` to save and `Ctrl + X` to quit.
@@ -178,7 +179,7 @@ Either modify manually or copy and paste the code below:
 ```python
 import RPi.GPIO as GPIO
 import time
-import picamera #new
+import picamera  # new
 
 sensorPin = 7
 
@@ -188,15 +189,16 @@ GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 prevState = False
 currState = False
 
-cam = picamera.PiCamera() #new
+cam = picamera.PiCamera()  # new
 
 while True:
     time.sleep(.1)
     prevState = currState
     currState = GPIO.input(sensorPin)
     if currState != prevState:
-        print "GPIO pin {0} is {1}".format(sensorPin, "HIGH" if currState else "LOW")
-        if currState: #new
+        newState = "HIGH" if currState else "LOW"
+        print "GPIO pin %s is %s" % (sensorPin, newState)
+        if currState:  # new
             cam.start_preview()
         else:
             cam.stop_preview()
@@ -228,9 +230,9 @@ Either modify manually or copy and paste the code below:
 import RPi.GPIO as GPIO
 import time
 import picamera
-import datetime #new
+import datetime  # new
 
-def getFileName(): #new
+def getFileName():  # new
     return datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S.h264")
 
 sensorPin = 7
@@ -248,14 +250,15 @@ while True:
     prevState = currState
     currState = GPIO.input(sensorPin)
     if currState != prevState:
-        print "GPIO pin {0} is {1}".format(sensorPin, "HIGH" if currState else "LOW")
+        newState = "HIGH" if currState else "LOW"
+        print "GPIO pin %s is %s" % (sensorPin, newState)
         if currState:
-            fileName = getFileName()  #new
+            fileName = getFileName()  # new
             cam.start_preview()
-            cam.start_recording(fileName) #new
+            cam.start_recording(fileName)  # new
         else:
             cam.stop_preview()
-            cam.stop_recording()  #new
+            cam.stop_recording()  # new
 ```
 
 Press `Ctrl + O` to save and `Ctrl + X` to quit. To run the program use the following command:
