@@ -77,6 +77,7 @@ nano pirtest.py
 Enter or copy and paste the code below:
 
 ```python
+#!/usr/bin/python
 import RPi.GPIO as GPIO
 import time
 
@@ -172,6 +173,7 @@ We first need to add the `import picamera` statement at the top; this allows you
 Either modify manually or copy and paste the code below:
 
 ```python
+#!/usr/bin/python
 import RPi.GPIO as GPIO
 import time
 import picamera  # new
@@ -222,6 +224,7 @@ nano pirCamera.py
 Either modify manually or copy and paste the code below:
 
 ```python
+#!/usr/bin/python
 import RPi.GPIO as GPIO
 import time
 import picamera
