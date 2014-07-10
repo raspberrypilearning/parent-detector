@@ -177,7 +177,7 @@ We can now add a bit more code to allow us to record to a file for playback at a
 
 For example, if the time now was the 11th of February 2014 at 10:24 AM and 18 seconds the file name would be something like this: `2014-02-11_10.24.18.h264`. This uses the format of `YEAR-MONTH-DAY_HOUR.MINUTE.SECOND.h264`; the h264 part is the format the video will be recorded in. It's the same format used by YouTube.
 
-To do this, we need to import the `datetime` Python module and write a function to generate the filename. See `getFileName` below; this uses the *string from time- function to insert the values from the current time into the specified string format. Then you simply use the commands to start and stop the recording using the generated file name. These should happen at the same time as the preview commands respectively.
+To do this, we need to import the `datetime` Python module and write a function to generate the filename. See `getFileName` below; this uses the *string from time* function to insert the values from the current time into the specified string format. Then you simply use the commands to start and stop the recording using the generated file name. These should happen at the same time as the preview commands respectively.
 
 ```
 nano pirCamera.py
@@ -257,7 +257,7 @@ Press `Ctrl + O` to save and `Ctrl + X` to quit. The changes will only take effe
 
 `sudo reboot`
 
-If you want to leave the monitor connected and turned on while the program is running, it's a good idea to edit the Python code to disable the camera *preview- lines. Use the `#` sign at the start of a line to disable it.
+If you want to leave the monitor connected and turned on while the program is running, it's a good idea to edit the Python code to disable the camera *preview* lines. Use the `#` sign at the start of a line to disable it.
 
 Another trick you can do is to start your Python program under a different login. To do this press `ALT - F2` before you log in; this will show you a new login prompt, so log in there and start the Python program. Now if you press `ALT - F1` to go back to the usual login prompt, it will appear as though the Raspberry Pi is innocently waiting for someone to log in.
 
