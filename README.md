@@ -57,6 +57,8 @@ As well as your Raspberry Pi and all its standard peripherals, you'll need:
 - [The worksheet](WORKSHEET.md)
 - (Optional) Final version of Python code [pirCamera.py](./pirCamera.py)
     - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/parent-detector/master/pirCamera.py --no-check-certificate`
+- (Optional) Final version of Python code [pirtest.py](./pirtest.py)
+    - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/parent-detector/master/pirtest.py --no-check-certificate`
 
 ## Licence
 
