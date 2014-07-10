@@ -20,21 +20,43 @@ A Raspberry Pi is so small that it can easily be hidden; that makes it the perfe
 - Gained experience in Python programming
 - Gained experience using the Raspberry Pi GPIO pins
 
-## Time required
-
-- 1-2 hours
-
 ## Requirements
 
 As well as your Raspberry Pi and all its standard peripherals, you'll need:
+
+### Hardware
 
 - Raspberry Pi Camera Module
 - PIR motion sensor module (try [eBay](http://search.ebay.co.uk/pir+motion+sensor+module))
 - **Female-to-female** jumper wires, at least 3 (try [eBay](http://search.ebay.co.uk/female+to+female+jumper+wires+solderless))
 
-### Recommended
+### Software
+
+- python-picamera
+
+### Extras
 
 - Camera Board 360 Gooseneck Mount (from [modmypi.com](https://www.modmypi.com/flexible-camera-mount)) or equivalent
+
+### Time required
+
+- 1-2 hours
+
+## Steps
+
+1. Connect the PIR motion sensor
+1. Test the PIR motion sensor
+1. Setting up the Camera Board
+1. Install the picamera Python module
+1. Program the camera to preview on movement
+1. Recording to a file and playing back
+1. Stealth mode
+
+## Worksheet & included files
+
+- [The worksheet](WORKSHEET.md)
+- (Optional) Final version of Python code [pirCamera.py](./pirCamera.py)
+    - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/parent-detector/master/pirCamera.py --no-check-certificate`
 
 ## Licence
 
@@ -42,6 +64,6 @@ Unless otherwise specified, everything in this repository is covered by the foll
 
 ![Creative Commons License](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)
 
-***Parent Detector**- by the [Raspberry Pi Foundation](http://raspberrypi.org) is licenced under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+***Parent Detector*** by the [Raspberry Pi Foundation](http://raspberrypi.org) is licenced under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 Based on a work at https://github.com/raspberrypilearning/parent-detector
