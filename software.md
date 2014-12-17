@@ -1,0 +1,3 @@
+## Software
+
+- python-picamera
