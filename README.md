@@ -2,7 +2,7 @@
 
 How to use a Raspberry Pi to detect who's been in your room.
 
-![](./images/cover.jpg)
+![](images/cover.jpg)
 
 A Raspberry Pi is so small that it can easily be hidden; that makes it the perfect tool for this kind of project. The basic idea is to use motion detection to trigger video recording via the Raspberry Pi Camera Board. You can then leave the Pi hidden in your room and see who's been caught on camera when you get home from school.
 
@@ -54,11 +54,11 @@ As well as your Raspberry Pi and all its standard peripherals, you'll need:
 
 ## Worksheet & included files
 
-- [The worksheet](WORKSHEET.md)
-- (Optional) Final version of Python code [pirCamera.py](./pirCamera.py)
-    - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/parent-detector/master/pirCamera.py --no-check-certificate`
-- (Optional) Final version of Python code [pirtest.py](./pirtest.py)
-    - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/parent-detector/master/pirtest.py --no-check-certificate`
+- [The worksheet](worksheet.md)
+- (Optional) Final version of Python code [pirCamera.py](pirCamera.py)
+    - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/parent-detector/master/code/pirCamera.py --no-check-certificate`
+- (Optional) Final version of Python code [pirtest.py](pirtest.py)
+    - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/parent-detector/master/code/pirtest.py --no-check-certificate`
 
 ## Licence
 
