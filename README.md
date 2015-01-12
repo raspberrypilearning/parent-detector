@@ -1,5 +1,7 @@
 # A Raspberry Pi Parent Detector
 
+![](cover.png)
+
 How to use a Raspberry Pi to detect who's been in your room.
 
 ![](images/cover.jpg)
