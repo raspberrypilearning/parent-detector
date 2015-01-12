@@ -2,8 +2,8 @@
   img: camera
   url: http://www.raspberrypi.org/products/camera-module/
 - name: 1 x PIR motion sensor
-  img: pir-sensor
+  img: pir
   url: http://search.ebay.co.uk/pir+motion+sensor+module
 - name: 2 x Female-to-female jumper leads
-  img: female-to-female-jumper
+  img: jumper-female-to-female
   url: http://shop.pimoroni.com/products/jumper-jerky
