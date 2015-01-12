@@ -1,7 +1,5 @@
 # Parent Detector
 
-## Introduction: what is a PIR module?
-
 PIR stands for Passive Infra Red. You might have seen these before as they are very common these days. You would most often find them in the corners of rooms for burglar alarm systems. All objects whose temperatures are above absolute zero emit infra red radiation. Infra red wavelengths are not visible to the human eye, but they can be detected by the electronics inside one of these modules.
 
 The sensor is regarded as passive because it doesn't send out any signal in order to detect movement. It adjusts itself to the infra red signature of the room it's in and then watches for any changes. Any object moving through the room will disturb the infra red signature, and will cause a change to be noticed by the PIR module.
@@ -63,11 +61,10 @@ while True:
 
 Press `Ctrl + O` to save and `Ctrl + X` to quit.
 
-Next make the Python file executable and then you can run it:
+Now run the Python file:
 
 ```bash
-chmod +x pirtest.py
-sudo pirtest.py
+sudo python pirtest.py
 ```
 
 If you get an error saying `RuntimeError: No access to /dev/mem` it means you forgot to use `sudo`. You must run programs that access the GPIO as root and `sudo` does this for you; to help remember you can think of it as 'super-user-do'.
@@ -125,7 +122,6 @@ We first need to add the `import picamera` statement at the top; this allows you
 Either modify manually or copy and paste the code below:
 
 ```python
-#!/usr/bin/python
 import RPi.GPIO as GPIO
 import time
 import picamera  # new
@@ -155,7 +151,7 @@ while True:
 
 Press `Ctrl + O` to save and `Ctrl + X` to quit. To run the program use the following command:
 
-```
+```bash
 sudo python pirCamera.py
 ```
 
@@ -213,7 +209,7 @@ while True:
 Press `Ctrl + O` to save and `Ctrl + X` to quit. To run the program use the following command:
 
 ```bash
-sudo pirCamera.py
+sudo python pirCamera.py
 ```
 
 Press `Ctrl + C` when you want to exit.
@@ -232,7 +228,7 @@ For example: `omxplayer 2014-02-11_10.24.18.h264 -o hdmi`
 
 You have probably noticed the red LED on the camera board comes on when you start your Python program. This will be quite noticeable to any would-be intruder so it's a good idea to disable it. This can be done by editing the Raspberry Pi configuration file. Enter the command below:
 
-```
+```bash
 sudo nano /boot/config.txt
 ```
 
@@ -244,7 +240,7 @@ disable_camera_led=1
 
 Press `Ctrl + O` to save and `Ctrl + X` to quit. The changes will only take effect after a reboot, so enter the following command to do this:
 
-```
+```bash
 sudo reboot
 ```
 
