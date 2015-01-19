@@ -128,7 +128,7 @@ import picamera  # new
 
 sensor = 4
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
 
 previous_state = False
@@ -182,7 +182,7 @@ def get_file_name():  # new
 
 sensor = 4
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
 
 previous_state = False
