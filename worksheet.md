@@ -12,21 +12,21 @@ We don't need to worry about its inner workings. What we're interested in are th
 
 Before booting your Raspberry Pi, connect the PIR module to the Raspberry Pi.
 
+Using three female-to-female jumper cables, you'll need to connect each of the PIR sensor's connectors to the appropriate pins on the Raspberry Pi.
+
+Connect the top one labelled `VCC` on the PIR sensor to the 5V pin on the Raspberry Pi, connect the middle one labelled `OUT` to GPIO pin 4, and connect the bottom one labelled `GND` to a ground pin also marked `GND`. All shown in the following diagram:
+
 ![](images/pir_wiring.png)
-
-Refer to the diagram above for pin numbers. If you look closely at the pins on your PIR module, you'll see some white text on the PCB near the base of each one. `VCC` is for a +5 volts input. Take one of the female to female jumpers and connect the VCC pin to pin 2 on the Pi (coloured red on the diagram); this will make the Pi provide 5 volts of power to the PIR module. Use another jumper to connect `GND` on the module to pin 6 on the Pi (coloured black on the diagram); this completes the circuit and allows current to flow back out of the module into ground. Now do the same for the sensor pin `OUT`; you can use any of the green pins on the Pi for this. I am going to use pin 7, since it's the first general purpose one.
-
-**Note**: If you have a different PIR module to the one pictured then your pin layout might be different; this is why I include the labels `VCC` `GND` and `OUT`.
 
 Now boot your Pi and log in.
 
 ## Test the PIR motion sensor
 
-We're going to use the Python programming language to write some code that will detect movement and print out some text; we can extend the program to involve the camera board later on. When movement is detected the PIR motion sensor applies power to its OUT pin, which we have connected to GPIO pin 7 on the Pi. So in our code we just need to continually check pin 7 to see if it has power or not.
+We're going to use the Python programming language to write some code that will detect movement and print out some text; we can extend the program to involve the camera board later on. When movement is detected the PIR motion sensor applies power to its OUT pin, which we have connected to GPIO pin 4 on the Pi. So in our code we just need to continually check pin 4 to see if it has power or not.
 
 If a pin has power we call it HIGH and if not we call it LOW.
 
-The program is pretty simple. We will first set up the Raspberry Pi GPIO pins to allow us to use pin 7 as an input; it can then detect when the PIR module sends power. We need to continually check the pin for any changes, so a `while True` loop is used for this. This is an infinite loop so the program will run continuously unless we stop it manually with `Ctrl + C`.
+The program is pretty simple. We will first set up the Raspberry Pi GPIO pins to allow us to use pin 4 as an input; it can then detect when the PIR module sends power. We need to continually check the pin for any changes, so a `while True` loop is used for this. This is an infinite loop so the program will run continuously unless we stop it manually with `Ctrl + C`.
 
 We then use two Boolean (True or False) variables for the previous and current states of the pin, the previous state being what the current state was the preceding time around the loop. Inside the loop we compare the previous state to the current state to detect when they're different. We don't want to keep displaying a message if there has been no change.
 
@@ -42,21 +42,21 @@ Enter or copy and paste the code below:
 import RPi.GPIO as GPIO
 import time
 
-sensorPin = 7
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+sensor = 4
 
-prevState = False
-currState = False
+previous_state = False
+current_state = False
 
 while True:
     time.sleep(0.1)
-    prevState = currState
-    currState = GPIO.input(sensorPin)
-    if currState != prevState:
-        newState = "HIGH" if currState else "LOW"
-        print "GPIO pin %s is %s" % (sensorPin, newState)
+    previous_state = current_state
+    current_state = GPIO.input(sensor)
+    if current_state != previous_state:
+        new_state = "HIGH" if current_state else "LOW"
+        print("GPIO pin %s is %s" % (sensor, new_state))
 ```
 
 Press `Ctrl + O` to save and `Ctrl + X` to quit.
@@ -64,7 +64,7 @@ Press `Ctrl + O` to save and `Ctrl + X` to quit.
 Now run the Python file:
 
 ```bash
-sudo python pirtest.py
+sudo python3 pirtest.py
 ```
 
 If you get an error saying `RuntimeError: No access to /dev/mem` it means you forgot to use `sudo`. You must run programs that access the GPIO as root and `sudo` does this for you; to help remember you can think of it as 'super-user-do'.
@@ -72,9 +72,9 @@ If you get an error saying `RuntimeError: No access to /dev/mem` it means you fo
 If you start moving or waving the sensor pin will go HIGH. Keep on waving and it will stay HIGH, and only go back to LOW if you keep still again. If you see the sensor behave like this, then everything is working correctly. If not, something is wrong and you need to go back and troubleshoot.
 
 ```
-GPIO pin 7 is HIGH
-GPIO pin 7 is LOW
-GPIO pin 7 is HIGH
+GPIO pin 4 is HIGH
+GPIO pin 4 is LOW
+GPIO pin 4 is HIGH
 ```
 
 Press `Ctrl + C` when you want to exit.
@@ -117,7 +117,7 @@ Now use the following command to edit the file:
 nano pirCamera.py
 ```
 
-We first need to add the `import picamera` statement at the top; this allows your program to access the pre-made code which can control the Camera Board. We then declare the camera object `cam`, which provides all the camera control functions that we need to use. Then inside the `while` loop where we print the HIGH or LOW message, we can test to see if `currState` is HIGH / True (meaning movement is detected); we can then start or stop the camera preview accordingly.
+We first need to add the `import picamera` statement at the top; this allows your program to access the pre-made code which can control the Camera Board. We then declare the camera object `cam`, which provides all the camera control functions that we need to use. Then inside the `while` loop where we print the HIGH or LOW message, we can test to see if `current_state` is HIGH / True (meaning movement is detected); we can then start or stop the camera preview accordingly.
 
 Either modify manually or copy and paste the code below:
 
@@ -126,24 +126,24 @@ import RPi.GPIO as GPIO
 import time
 import picamera  # new
 
-sensorPin = 7
+sensor = 4
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
 
-prevState = False
-currState = False
+previous_state = False
+current_state = False
 
 cam = picamera.PiCamera()  # new
 
 while True:
     time.sleep(0.1)
-    prevState = currState
-    currState = GPIO.input(sensorPin)
-    if currState != prevState:
-        newState = "HIGH" if currState else "LOW"
-        print "GPIO pin %s is %s" % (sensorPin, newState)
-        if currState:  # new
+    previous_state = current_state
+    current_state = GPIO.input(sensor)
+    if current_state != previous_state:
+        new_state = "HIGH" if current_state else "LOW"
+        print("GPIO pin %s is %s" % (sensor, new_state))
+        if current_state:  # new
             cam.start_preview()
         else:
             cam.stop_preview()
@@ -152,7 +152,7 @@ while True:
 Press `Ctrl + O` to save and `Ctrl + X` to quit. To run the program use the following command:
 
 ```bash
-sudo python pirCamera.py
+sudo python3 pirCamera.py
 ```
 
 Press `Ctrl + C` when you want to exit.
@@ -163,7 +163,7 @@ We can now add a bit more code to allow us to record to a file for playback at a
 
 For example, if the time now was the 11th of February 2014 at 10:24 AM and 18 seconds the file name would be something like this: `2014-02-11_10.24.18.h264`. This uses the format of `YEAR-MONTH-DAY_HOUR.MINUTE.SECOND.h264`; the h264 part is the format the video will be recorded in. It's the same format used by YouTube.
 
-To do this, we need to import the `datetime` Python module and write a function to generate the filename. See `getFileName` below; this uses the *string from time* function to insert the values from the current time into the specified string format. Then you simply use the commands to start and stop the recording using the generated file name. These should happen at the same time as the preview commands respectively.
+To do this, we need to import the `datetime` Python module and write a function to generate the filename. See `get_file_name` below; this uses the *string from time* function to insert the values from the current time into the specified string format. Then you simply use the commands to start and stop the recording using the generated file name. These should happen at the same time as the preview commands respectively.
 
 ```bash
 nano pirCamera.py
@@ -177,28 +177,28 @@ import time
 import picamera
 import datetime  # new
 
-def getFileName():  # new
+def get_file_name():  # new
     return datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S.h264")
 
-sensorPin = 7
+sensor = 4
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
 
-prevState = False
-currState = False
+previous_state = False
+current_state = False
 
 cam = picamera.PiCamera()
 
 while True:
     time.sleep(0.1)
-    prevState = currState
-    currState = GPIO.input(sensorPin)
-    if currState != prevState:
-        newState = "HIGH" if currState else "LOW"
-        print "GPIO pin %s is %s" % (sensorPin, newState)
-        if currState:
-            fileName = getFileName()  # new
+    previous_state = current_state
+    current_state = GPIO.input(sensor)
+    if current_state != previous_state:
+        new_state = "HIGH" if current_state else "LOW"
+        print("GPIO pin %s is %s" % (sensor, new_state))
+        if current_state:
+            fileName = get_file_name()  # new
             cam.start_preview()
             cam.start_recording(fileName)  # new
         else:
@@ -209,7 +209,7 @@ while True:
 Press `Ctrl + O` to save and `Ctrl + X` to quit. To run the program use the following command:
 
 ```bash
-sudo python pirCamera.py
+sudo python3 pirCamera.py
 ```
 
 Press `Ctrl + C` when you want to exit.
