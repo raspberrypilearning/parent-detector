@@ -42,10 +42,10 @@ Enter or copy and paste the code below:
 import RPi.GPIO as GPIO
 import time
 
+sensor = 4
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
-
-sensor = 4
 
 previous_state = False
 current_state = False
