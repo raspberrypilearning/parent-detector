@@ -94,7 +94,7 @@ Before you can begin the project, you'll need to connect the camera. You should 
 
 Follow the instructions [here](http://www.raspberrypi.org/camera-module-setup/) to set up and test the camera module. Stop once you have successfully used a few of the example commands.
 
-Next, if you have it, set up the camera mount. 
+Next, if you have it, set up the camera mount. This will enable you to aim the camera at the right part of the room. 
 
 If you have not done so already, test the camera is working using the following command:
 
@@ -227,9 +227,13 @@ omxplayer <file> -o hdmi
 
 For example: `omxplayer 2014-02-11_10.24.18.h264 -o hdmi`
 
-## Stealth mode
 
-You have probably noticed the red LED on the camera board comes on when you start your Python program. This will be quite noticeable to any would-be intruder so it's a good idea to disable it. This can be done by editing the Raspberry Pi configuration file. Enter the command below:
+
+## What next? 
+
+You have completed your parent detector, but why not try taking it to another level
+
+You have probably noticed the red LED on the camera board comes on when you start your Python program. This might attract the attention of any would-be intruder so it's a good idea to disable it. This can be done by editing the Raspberry Pi configuration file. Enter the command below:
 
 ```bash
 sudo nano /boot/config.txt
@@ -251,4 +255,6 @@ If you want to leave the monitor connected and turned on while the program is ru
 
 Another trick you can do is to start your Python program under a different login. To do this press `ALT - F2` before you log in; this will show you a new login prompt, so log in there and start the Python program. Now if you press `ALT - F1` to go back to the usual login prompt, it will appear as though the Raspberry Pi is innocently waiting for someone to log in.
 
-Now all you have to do is set the trap and wait. Good luck!
+## What next? 
+
+
