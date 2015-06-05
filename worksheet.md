@@ -88,11 +88,11 @@ Press `Ctrl + C` when you want to exit.
 On the PIR module you should see two orange components with sockets that fit a Phillips screwdriver (see above). These are called potentiometers: they allow you to adjust the sensitivity of the sensor and the detection time. You should begin by setting the sensitivity to max and the time to min, but you can vary this later if you wish.
 
 
-## Connect the camera
+## Setting up the camera
 
 Before you can begin the project, you'll need to connect the camera. You should do this before you boot the Pi, or, if your Pi is running, you should stop it by entering `sudo-halt`. 
 
-Follow the official instructions [here](http://www.raspberrypi.org/camera-module-setup/) to set up and test the Raspberry Pi Camera Board. Stop once you have successfully used a few of the example commands.
+Follow the instructions [here](http://www.raspberrypi.org/camera-module-setup/) to set up and test the camera module. Stop once you have successfully used a few of the example commands.
 
 Next, if you have it, set up the camera mount. 
 
@@ -106,7 +106,7 @@ Press `Ctrl + C` to exit.
 
 ## Program the camera to preview on movement
 
-Now we're ready to extend our previous program to give it the ability to control the Camera Board. To start with, let's just make our program display what the camera can see when movement is detected; we can set up recording to a file later.
+Now we're ready to extend our previous program to give it the ability to control the camera module. To start with, let's just make our program display what the camera can see when movement is detected; we can set up recording to a file later.
 
 Make a copy of the previous program and we'll use that for this step:
 
@@ -120,9 +120,9 @@ Now use the following command to edit the file:
 nano pirCamera.py
 ```
 
-We first need to add the `import picamera` statement at the top; this allows your program to access the pre-made code which can control the Camera Board. We then declare the camera object `cam`, which provides all the camera control functions that we need to use. Then inside the `while` loop where we print the HIGH or LOW message, we can test to see if `current_state` is HIGH / True (meaning movement is detected); we can then start or stop the camera preview accordingly.
+We first need to add the `import picamera` statement at the top; this allows your program to access the pre-made code which can control the camera module. We then declare the camera object `cam`, which provides all the camera control functions that we need to use. Then inside the `while` loop where we print the HIGH or LOW message, we can test to see if `current_state` is HIGH or True (meaning that movement is detected); we can then start or stop the camera preview accordingly.
 
-Either modify manually or copy and paste the code below:
+Either copy and paste the code below, or enter it manually:
 
 ```python
 import RPi.GPIO as GPIO
@@ -162,17 +162,17 @@ Press `Ctrl + C` when you want to exit.
 
 ## Recording to a file and playing back
 
-We can now add a bit more code to allow us to record to a file for playback at a later stage. Ideally, if there are many intruders in your room you want to capture them all and not just the most recent one. So to do that, we need a way to automatically generate a new file name each time movement is detected. The easiest and safest way to do this is to make a file name out of the date and time.
+We can now add a bit more code to allow us to record to a file for playback at a later stage. If there are multiple intruders in your room, you want to be able to capture them all and not just the most recent one. To do that, we need a way to generate a new file name automatically each time movement is detected. The easiest and safest way to do this is to make a file name out of the date and time.
 
-For example, if the time now was the 11th of February 2014 at 10:24 AM and 18 seconds the file name would be something like this: `2014-02-11_10.24.18.h264`. This uses the format of `YEAR-MONTH-DAY_HOUR.MINUTE.SECOND.h264`; the h264 part is the format the video will be recorded in. It's the same format used by YouTube.
+For example, if the time now was the 11th of February 2014 at 10:24 AM and 18 seconds the file name would be something like this: `2014-02-11_10.24.18.h264`. This uses the format of `YEAR-MONTH-DAY_HOUR.MINUTE.SECOND.h264`; h264 refers to the format the video will be recorded in. It's the same as the format used by YouTube.
 
-To do this, we need to import the `datetime` Python module and write a function to generate the filename. See `get_file_name` below; this uses the *string from time* function to insert the values from the current time into the specified string format. Then you simply use the commands to start and stop the recording using the generated file name. These should happen at the same time as the preview commands respectively.
+We need to import the `datetime` Python module and write a function to generate the filename. See `get_file_name` below: this uses the string from time function to insert the values from the current time into the specified string format. Then you simply use the commands to start and stop the recording using the generated file name. These should happen at the same time as the preview commands respectively.
 
 ```bash
 nano pirCamera.py
 ```
 
-Either modify manually or copy and paste the code below:
+Either copy and paste the code below, or enter it manually:
 
 ```python
 import RPi.GPIO as GPIO
