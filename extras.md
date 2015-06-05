@@ -1,3 +1,3 @@
 You may also need:
 
-- Camera mount
+- A camera mount
