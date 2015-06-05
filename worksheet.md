@@ -87,15 +87,14 @@ Press `Ctrl + C` when you want to exit.
 
 On the PIR module you should see two orange components with sockets that fit a Phillips screwdriver (see above). These are called potentiometers: they allow you to adjust the sensitivity of the sensor and the detection time. You should begin by setting the sensitivity to max and the time to min, but you can vary this later if you wish.
 
-## Setting up the Camera Board
 
-Follow the official instructions [here](http://www.raspberrypi.org/camera) to set up and test the Raspberry Pi Camera Board. Stop once you have successfully used a few of the example commands.
+## Connect the camera
 
-Next, if you have it, set up the 360 Gooseneck Mount. This will allow you to aim the camera at the right part of the room. One end of the mount inserts into the headphone jack on the Pi; it only uses this to hold itself in place and does nothing to the jack. The other end is a screw with a pair of plastic washers that secure the camera board to the Gooseneck.
+Before you can begin the project, you'll need to connect the camera. You should do this before you boot the Pi, or, if your Pi is running, you should stop it by entering `sudo-halt`. 
 
-You should then have something similar to the image below. Please note the [red](http://mall.egoman.com.cn/index.php?option=com_content&view=article&id=75&Itemid=218) Raspberry Pi is not available outside of China, Hong Kong and Taiwan.
+Follow the official instructions [here](http://www.raspberrypi.org/camera-module-setup/) to set up and test the Raspberry Pi Camera Board. Stop once you have successfully used a few of the example commands.
 
-![](images/pir_camera_board_pi.jpg)
+Next, if you have it, set up the camera mount. 
 
 If you have not done so already, test the camera is working using the following command:
 
