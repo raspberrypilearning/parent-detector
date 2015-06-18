@@ -1,3 +1,3 @@
 You may also need:
 
-- Camera mount
+- A [camera mount](http://www.modmypi.com/raspberry-pi/camera/camera-board-360-gooseneck-mount)
