@@ -92,7 +92,7 @@ On the PIR module you should see two orange components with sockets that fit a P
 
 Before you can begin the project, you'll need to connect the camera. You should do this before you boot the Pi, or, if your Pi is running, you should stop it by entering `sudo-halt`. 
 
-Follow the instructions [here](http://www.raspberrypi.org/camera-module-setup/) to set up and test the camera module. Stop once you have successfully used a few of the example commands.
+Follow the instructions [here](https://www.raspberrypi.org/help/camera-module-setup/) to set up and test the camera module. Stop once you have successfully used a few of the example commands.
 
 Next, if you have it, set up the camera mount. This will enable you to aim the camera at the right part of the room. 
 
