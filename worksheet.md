@@ -10,7 +10,7 @@ The sensor is regarded as passive because it doesn't send out any signal in orde
 
 ![](images/pir_module.png)
 
-We don't need to worry about the inner workings of the motion sensor. What we're interested in are the three pins on it: we can connect those to the Raspberry Pi GPIO pins. One pin is for +5 volts, one pin is for ground and the other is the sensor pin (the middle pin on our Pi). This sensor pin will receive power whenever motion is detected by the PIR module. We can then see that happening on the Raspberry Pi and take action accordingly.
+We don't need to worry about the inner workings of the motion sensor. What we're interested in are the three pins on it, that can be used to connect it to the Raspberry Pi.
 
 ## Connect the PIR motion sensor
 
@@ -18,7 +18,9 @@ Before booting your Raspberry Pi, connect the PIR module to the Raspberry Pi.
 
 Using three female-to-female jumper cables, you'll need to connect each of the PIR sensor's connectors to the appropriate pins on the Raspberry Pi.
 
-Connect the top one (labelled `VCC` on the PIR sensor) to the 5V pin on the Raspberry Pi, connect the middle one (labelled `OUT`) to GPIO pin 4, and connect the bottom one (labelled `GND`) to a ground pin marked `GND`. 
+1. Connect the one labelled `VCC` on the PIR sensor to the 5V pin on the Raspberry Pi. This provide power to the PIR sensor.
+1. Connect the one labelled `GND` to a ground pin on the Raspberry Pi. This completes the circuit.
+1. Connect the one labelled `OUT` to GPIO pin 4. This pin will output a voltage when motion is detected, that can then be received by the Raspberry Pi
 
 ![](images/pir_wiring.png)
 
@@ -34,13 +36,7 @@ The program is pretty simple. We will first set up the Raspberry Pi GPIO pins to
 
 We then use two Boolean variables (True or False) for the previous and current states of the pin, the previous state being what the current state was the preceding time around the loop. Inside the loop we compare the previous state to the current state to detect when they're different. We don't want to keep displaying a message if there has been no change.
 
-Firstly create a blank Python file with the following command:
-
-```bash
-nano pirtest.py
-```
-
-Enter or copy and paste the code below:
+Open IDLE (`Menu`>`Programming`>`Python3 (IDLE)` and copy in the code below.
 
 ```python
 import RPi.GPIO as GPIO
