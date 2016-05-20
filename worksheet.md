@@ -24,65 +24,31 @@ Using three female-to-female jumper cables, you'll need to connect each of the P
 
 ![](images/pir_wiring.png)
 
-Now boot your Pi and log in.
-
 ## Test the PIR motion sensor
 
-We're going to use the Python programming language to write some code that will detect movement and print out some text; we can extend the program to involve the camera board later on. When movement is detected the PIR motion sensor applies power to its OUT pin, which we have connected to GPIO pin 4 on the Pi. So in our code we just need to continually check pin 4 to see if it has power or not.
+We're going to use the Python programming language to write some code that will detect movement and print out some text; we can extend the program to involve the camera board later on. 
 
-If a pin has power we call it HIGH and if not we call it LOW.
-
-The program is pretty simple. We will first set up the Raspberry Pi GPIO pins to allow us to use pin 4 as an input; it can then detect when the PIR module sends power. We need to check the pin continually for any changes, so we use a `while True` loop for this. This is an infinite loop so the program will run continuously unless we stop it manually with `Ctrl + C`.
-
-We then use two Boolean variables (True or False) for the previous and current states of the pin, the previous state being what the current state was the preceding time around the loop. Inside the loop we compare the previous state to the current state to detect when they're different. We don't want to keep displaying a message if there has been no change.
+The program is pretty simple. We will first set up the Raspberry Pi GPIO pins to allow us to use pin 4 as an input; it can then detect when the PIR module detects motion. We need to check the pin continually for any changes, so we use a `while True` loop for this. This is an infinite loop so the program will run continuously unless we stop it manually with `Ctrl + F6`.
 
 Open IDLE (`Menu`>`Programming`>`Python3 (IDLE)` and copy in the code below.
 
 ```python
-import RPi.GPIO as GPIO
-import time
+from gpiozero import MotionSensor
 
-sensor = 4
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
-
-previous_state = False
-current_state = False
-
+pir = MotionSensor(4)
 while True:
-    time.sleep(0.1)
-    previous_state = current_state
-    current_state = GPIO.input(sensor)
-    if current_state != previous_state:
-        new_state = "HIGH" if current_state else "LOW"
-        print("GPIO pin %s is %s" % (sensor, new_state))
+    if pir.motion_detected:
+	    print("Motion detected!")
 ```
 
-Press `Ctrl + O` to save and `Ctrl + X` to quit.
+Save you file and press `F5` to run it.
 
-Now run the Python file:
-
-```bash
-sudo python3 pirtest.py
-```
-
-If you get an error saying `RuntimeError: No access to /dev/mem` it means you forgot to use `sudo`. You must run programs that access the GPIO as root and `sudo` does this for you (if you need help to remember this you can think of it as 'super-user-do').
-
-If you start moving or waving the sensor pin will go HIGH. Keep on waving and it will stay HIGH, and only go back to LOW if you keep still again. If you see the sensor behave like this, then everything is working correctly. If not, something is wrong and you need to go back and troubleshoot.
-
-```
-GPIO pin 4 is HIGH
-GPIO pin 4 is LOW
-GPIO pin 4 is HIGH
-```
-
-Press `Ctrl + C` when you want to exit.
+Everytime the PIR detects motion, you should see the words `Motion detected!` appear in the IDLE shell.
+Press `Ctrl + F6` when you want to exit.
 
 ![](images/pir_potentiometers.png)
 
 On the PIR module you should see two orange components with sockets that fit a Phillips screwdriver (see above). These are called potentiometers: they allow you to adjust the sensitivity of the sensor and the detection time. You should begin by setting the sensitivity to max and the time to min, but you can vary this later if you wish.
-
 
 ## Setting up the camera
 
@@ -92,69 +58,28 @@ Follow the instructions [here](https://www.raspberrypi.org/help/camera-module-se
 
 Next, if you have it, set up the camera mount. This will enable you to aim the camera at the right part of the room. 
 
-If you have not done so already, test the camera is working using the following command:
-
-```bash
-raspivid -t 0
-```
-
-Press `Ctrl + C` to exit.
-
 ## Program the camera to preview on movement
 
 Now we're ready to extend our previous program to give it the ability to control the camera module. To start with, let's just make our program display what the camera can see when movement is detected; we can set up recording to a file later.
 
-Make a copy of the previous program and we'll use that for this step:
-
-```bash
-cp pirtest.py pirCamera.py
-```
-
-Now use the following command to edit the file:
-
-```bash
-nano pirCamera.py
-```
-
-We first need to add the `import picamera` statement at the top; this allows your program to access the pre-made code which can control the camera module. We then declare the camera object `cam`, which provides all the camera control functions that we need to use. Then inside the `while` loop where we print the HIGH or LOW message, we can test to see if `current_state` is HIGH or True (meaning that movement is detected); we can then start or stop the camera preview accordingly.
+We first need to add the `import picamera` statement at the top; this allows your program to access the pre-made code which can control the camera module.
+We then declare the camera object `camera`, which provides all the camera control functions that we need to use. Then inside the `while` loop we can start the camera preview each time motion is detected.
 
 Either copy and paste the code below, or enter it manually:
 
 ```python
-import RPi.GPIO as GPIO
-import time
-import picamera  # new
+from gpiozero import MotionSensor
+from picamera import PiCamera
 
-sensor = 4
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
-
-previous_state = False
-current_state = False
-
-cam = picamera.PiCamera()  # new
-
+camera = PiCamera()
+pir = MotionSensor(4)
 while True:
-    time.sleep(0.1)
-    previous_state = current_state
-    current_state = GPIO.input(sensor)
-    if current_state != previous_state:
-        new_state = "HIGH" if current_state else "LOW"
-        print("GPIO pin %s is %s" % (sensor, new_state))
-        if current_state:  # new
-            cam.start_preview()
-        else:
-            cam.stop_preview()
+    pir.wait_for_motion()
+    camera.start_preview()
+	pir.wait_for_no_motion()
+	camera.stop_preview()
 ```
 
-Press `Ctrl + O` to save and `Ctrl + X` to quit. To run the program use the following command:
-
-```bash
-sudo python3 pirCamera.py
-```
-
-Press `Ctrl + C` when you want to exit.
 
 ## Recording to a file and playing back
 
@@ -162,66 +87,38 @@ We can now add a bit more code to allow us to record to a file for playback at a
 
 For example, if the time now was the 11th of February 2014 at 10:24 AM and 18 seconds the file name would be something like this: `2014-02-11_10.24.18.h264`. This uses the format of `YEAR-MONTH-DAY_HOUR.MINUTE.SECOND.h264`; h264 refers to the format the video will be recorded in. It's the same as the format used by YouTube.
 
-We need to import the `datetime` Python module and write a function to generate the filename. See `get_file_name` below: this uses the string from time function to insert the values from the current time into the specified string format. Then you simply use the commands to start and stop the recording using the generated file name. These should happen at the same time as the preview commands respectively.
-
-```bash
-nano pirCamera.py
-```
+We need to import the `datetime` Python module and write a function to generate the filename. Then you simply use the commands to start and stop the recording using the generated file name. These should happen at the same time as the preview commands respectively.
 
 Either copy and paste the code below, or enter it manually:
 
 ```python
-import RPi.GPIO as GPIO
-import time
-import picamera
-import datetime  # new
+from gpiozero import MotionSensor
+from picamera import PiCamera
+from datetime import datetime
 
-def get_file_name():  # new
-    return datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S.h264")
-
-sensor = 4
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(sensor, GPIO.IN, GPIO.PUD_DOWN)
-
-previous_state = False
-current_state = False
-
-cam = picamera.PiCamera()
-
+camera = PiCamera()
+pir = MotionSensor(4)
 while True:
-    time.sleep(0.1)
-    previous_state = current_state
-    current_state = GPIO.input(sensor)
-    if current_state != previous_state:
-        new_state = "HIGH" if current_state else "LOW"
-        print("GPIO pin %s is %s" % (sensor, new_state))
-        if current_state:
-            fileName = get_file_name()  # new
-            cam.start_preview()
-            cam.start_recording(fileName)  # new
-        else:
-            cam.stop_preview()
-            cam.stop_recording()  # new
+    pir.wait_for_motion()
+	filename = datetime.now().strftime("%Y-%m-%d_%H.%M.%S.h264")
+    camera.start_recording(filename)
+    pir.wait_for_no_motion()
+	camera.stop_recording()
 ```
-
-Press `Ctrl + O` to save and `Ctrl + X` to quit. To run the program use the following command:
-
-```bash
-sudo python3 pirCamera.py
-```
-
-Press `Ctrl + C` when you want to exit.
+Save and run your script.
+You can quit it once it is tested and has taken some video.
 
 ### Playback
 
-If you now use the `ls` command you should see that a few files have been generated. You can use the following command to play back a file. Replace `<file>` with the filename you wish to play.
+If you look inside the file browser you should see that a few files have been generated. You can play the videos in the terminal (`Ctrl+Alt+t`) by typing:
 
 ```
 omxplayer <file> -o hdmi
 ```
 
 For example: `omxplayer 2014-02-11_10.24.18.h264 -o hdmi`
+
+Or you can rename the file to an `mp4` and open it in the Epiphany web browser.
 
 ## What next? 
 
