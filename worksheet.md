@@ -30,7 +30,7 @@ We're going to use the Python programming language to write some code that will 
 
 The program is pretty simple. We will first set up the Raspberry Pi GPIO pins to allow us to use pin 4 as an input; it can then detect when the PIR module detects motion. We need to check the pin continually for any changes, so we use a `while True` loop for this. This is an infinite loop so the program will run continuously unless we stop it manually with `Ctrl + F6`.
 
-Open IDLE (`Menu`>`Programming`>`Python3 (IDLE)` and copy in the code below.
+Open IDLE (`Menu`>`Programming`>`Python3 (IDLE)`), create a new file (by using the `File`>`New File` menu options within IDLE) and copy in the code below.
 
 ```python
 from gpiozero import MotionSensor
@@ -41,7 +41,7 @@ while True:
 	    print("Motion detected!")
 ```
 
-Save you file and press `F5` to run it.
+Save your file and press `F5` to run it.
 
 Everytime the PIR detects motion, you should see the words `Motion detected!` appear in the IDLE shell.
 Press `Ctrl + F6` when you want to exit.
@@ -52,7 +52,7 @@ On the PIR module you should see two orange components with sockets that fit a P
 
 ## Setting up the camera
 
-Before you can begin the project, you'll need to connect the camera. You should do this before you boot the Pi, or, if your Pi is running, you should stop it by entering `sudo-halt`. 
+Before you can begin the project, you'll need to connect the camera. You should do this before you boot the Pi, or, if your Pi is running, you should stop it by entering `sudo halt`. 
 
 Follow the instructions [here](https://www.raspberrypi.org/help/camera-module-setup/) to set up and test the camera module. Stop once you have successfully used a few of the example commands.
 
