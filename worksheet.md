@@ -16,7 +16,7 @@ We don't need to worry about the inner workings of the motion sensor. What we're
 
 Before booting your Raspberry Pi, connect the PIR module to the Raspberry Pi.
 
-Using three female-to-female jumper cables, you'll need to connect each of the PIR sensor's connectors to the appropriate pins on the Raspberry Pi.
+Using three female-to-female jumper cables, you'll need to connect each of the PIR sensor's connectors to the appropriate pins on the Raspberry Pi. Don't rely on the diagram, for which pin is which though; check the labels on the PIR.
 
 1. Connect the one labelled `VCC` on the PIR sensor to the 5V pin on the Raspberry Pi. This provide power to the PIR sensor.
 1. Connect the one labelled `GND` to a ground pin on the Raspberry Pi. This completes the circuit.
