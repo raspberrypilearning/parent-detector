@@ -7,6 +7,7 @@ In this project you will use a Raspberry Pi, a picamera and a passive infrared m
 
 ## Connecting a PIR {mini}
 {var1} = 4
+
 [connect_pir.md](connect_pir.md)
 
 ## Setting up a picamera {mini}
@@ -119,8 +120,10 @@ camera.stop_recording()
 
 ## Adding a time stamp to your video
 
+### Task 3
+
 Now you know how to add a timestamp, this can be added to your code.
-Insteaf of setting the `filename` variable to `my_vid.h264`, it can be set to the timestamp that you learned about in the previous section.
+Instead of setting the `filename` variable to `my_vid.h264`, it can be set to the timestamp that you learned about in the previous section.
 
 ### Code {hint}{1}
 
@@ -153,12 +156,13 @@ camera.stop_recording()
 
 ## Adding a loop
 
+### Task 4
+
 At the moment your code runs once, and then ends. This is great to catch an intruder out when they first enter your room, but not to find out what they're doing in there. If they stop moving for a second or two, the recording will stop and the program will end.
 
 You can add a while loop into your code to make sure that it constantly watches out for movement and captures video.
 
 If you need help with this, then you can check out the [mini project on while loops](while_loops.md).
-Otherwise, just have a go and use the hints below if you need to.
 
 ### Code {hint}
 ``` python
