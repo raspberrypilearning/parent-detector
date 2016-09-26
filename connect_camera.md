@@ -8,7 +8,7 @@ First of all, with the Pi switched off, you'll need to connect the camera module
 
 1. Locate the camera port and connect the camera:
 
-    ![Connect the camera](images/connect-camera.jpg)
+    ![camera_connect](camera_connect.gif)
 
 1. Start up the Pi.
 

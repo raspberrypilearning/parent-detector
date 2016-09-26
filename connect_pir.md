@@ -6,6 +6,9 @@ Using three female-to-female jumper cables, you'll need to connect each of the P
 1. Connect the one labelled `GND` to a ground pin on the Raspberry Pi. This completes the circuit.
 1. Connect the one labelled `OUT` to GPIO pin {var1}. This pin will output a voltage when motion is detected, that can then be received by the Raspberry Pi
 
+![](images/PIR_connect_1.gif)
+![](images/PIR_connect_2.gif)
+
 ![](images/pir_wiring.png)
 
 With the PIR connected you can now write a little bit of code to test that it is working.
