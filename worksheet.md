@@ -116,7 +116,7 @@ If you look inside the file browser you should see that a few files have been ge
 omxplayer <file> -o hdmi
 ```
 
-For example: `omxplayer 2014-02-11_10.24.18.h264 -o hdmi`
+For example: `omxplayer 2017-02-11_10.24.18.h264 -o hdmi`
 
 Or you can rename the file to an `mp4` and open it in the Epiphany web browser.
 
@@ -126,25 +126,25 @@ You have completed your parent detector, but why not try taking it to another le
 
 - You could disable the red LED on the camera board which comes on when you start your Python program. This can be done by editing the Raspberry Pi configuration file. Enter the command below:
 
-```bash
-sudo nano /boot/config.txt
-```
+	```bash
+	sudo nano /boot/config.txt
+	```
 
-Add the following line to the end of the file:
+	Add the following line to the end of the file:
 
-```
-disable_camera_led=1
-```
+	```
+	disable_camera_led=1
+	```
 
-Press `Ctrl + O` to save and `Ctrl + X` to quit. The changes will only take effect after a reboot, so enter the following command to do this:
+	Press `Ctrl + O` to save and `Ctrl + X` to quit. The changes will only take effect after a reboot, so enter the following command to do this:
 
-```bash
-sudo reboot
-```
+	```bash
+	sudo reboot
+	```
 
 - If you want to leave the monitor connected and turned on while the program is running, it's a good idea to edit the Python code to disable the camera preview lines. Use the `#` sign at the start of a line to disable it.
 
-- You could also start your Python program under a different login. To do this press `ALT - F2` before you log in; this will show you a new login prompt, so log in there and start the Python program. Now if you press `ALT - F1` to go back to the usual login prompt, it will appear as though the Raspberry Pi is innocently waiting for someone to log in.
+- You could also start your Python program under a different login. To do this press `ALT + F2` before you log in; this will show you a new login prompt, so log in there and start the Python program. Now if you press `ALT + F1` to go back to the usual login prompt, it will appear as though the Raspberry Pi is innocently waiting for someone to log in.
 
 
 
