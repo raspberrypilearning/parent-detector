@@ -10,13 +10,13 @@ The sensor is regarded as passive because it doesn't send out any signal in orde
 
 ![](images/pir_module.png)
 
-We don't need to worry about the inner workings of the motion sensor. What we're interested in are the three pins on it, that can be used to connect it to the Raspberry Pi.
+We don't need to worry about the inner workings of the motion sensor. What we're interested in are the three pins on it, which can be used to connect it to the Raspberry Pi.
 
 ## Connect the PIR motion sensor
 
 Before booting your Raspberry Pi, connect the PIR module to the Raspberry Pi.
 
-Using three female-to-female jumper cables, you'll need to connect each of the PIR sensor's connectors to the appropriate pins on the Raspberry Pi. Don't rely on the diagram, for which pin is which though; check the labels on the PIR.
+Using three female-to-female jumper cables, you'll need to connect each of the PIR sensor's connectors to the appropriate pins on the Raspberry Pi. Don't rely on the diagram to identify which pin is which, though: check the labels on the PIR.
 
 1. Connect the one labelled `VCC` on the PIR sensor to the 5V pin on the Raspberry Pi. This provide power to the PIR sensor.
 1. Connect the one labelled `GND` to a ground pin on the Raspberry Pi. This completes the circuit.
@@ -144,7 +144,7 @@ sudo reboot
 
 - If you want to leave the monitor connected and turned on while the program is running, it's a good idea to edit the Python code to disable the camera preview lines. Use the `#` sign at the start of a line to disable it.
 
-- you could also start your Python program under a different login. To do this press `ALT - F2` before you log in; this will show you a new login prompt, so log in there and start the Python program. Now if you press `ALT - F1` to go back to the usual login prompt, it will appear as though the Raspberry Pi is innocently waiting for someone to log in.
+- You could also start your Python program under a different login. To do this press `ALT - F2` before you log in; this will show you a new login prompt, so log in there and start the Python program. Now if you press `ALT - F1` to go back to the usual login prompt, it will appear as though the Raspberry Pi is innocently waiting for someone to log in.
 
 
 
