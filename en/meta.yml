@@ -1,0 +1,20 @@
+title: The parent detector
+hero_image: images/banner.png
+description: Detect intruders with a Raspberry Pi
+original_url: https://www.raspberrypi.org/learning/parent-detector
+theme: yellow
+listed: true
+ingredient: false
+copyedit: true
+interests: ""
+technologies: "rpi, python, physical computing"
+steps:
+  - title: Introduction
+  - title: What you will need
+  - title: Connect the PIR sensor
+  - title: Connect the camera
+  - title: Test the PIR sensor
+  - title: Set up the camera preview
+  - title: Record video to a file
+  - title: Play video
+  - title: "Challenge: stealth mode"
