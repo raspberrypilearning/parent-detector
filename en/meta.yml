@@ -6,6 +6,7 @@ theme: yellow
 listed: true
 ingredient: false
 copyedit: true
+curriculum: builder, design-0, programming-1, phys-comp-2, manufacture-0, community-0
 interests: ""
 technologies: "rpi, python, physical computing"
 steps:
