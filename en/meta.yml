@@ -3,6 +3,7 @@ hero_image: images/banner.png
 description: Detect intruders with a Raspberry Pi
 original_url: https://www.raspberrypi.org/learning/parent-detector
 theme: yellow
+duration: 2
 listed: true
 ingredient: false
 copyedit: true
