@@ -7,16 +7,21 @@ duration: 2
 listed: true
 ingredient: false
 copyedit: true
-curriculum: builder, design-0, programming-1, phys-comp-2, manufacture-0, community-0
-interests: ""
-technologies: "raspberry-pi, python, physical computing"
-steps:
-  - title: Introduction
-  - title: What you will need
-  - title: Connect the PIR sensor
-  - title: Connect the camera
-  - title: Test the PIR sensor
-  - title: Set up the camera preview
-  - title: Record video to a file
-  - title: Play video
-  - title: "Challenge: stealth mode"
+curriculum: 2, design-0, programming-2, phys-comp-2, manufacture-0, community-0
+interests: humour
+technologies: raspberry-pi, python, electronic-components
+hardware: raspberry-pi, electronic-components
+software: python
+site_areas: projects
+version: 4
+last_tested: 2017-01-01
+steps: 
+- title: Introduction
+- title: What you will need
+- title: Connect the PIR sensor
+- title: Connect the camera
+- title: Test the PIR sensor
+- title: Set up the camera preview
+- title: Record video to a file
+- title: Play video
+- title: "Challenge: stealth mode"
