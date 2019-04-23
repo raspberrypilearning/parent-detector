@@ -32,7 +32,7 @@ while True:
     pir.wait_for_motion()
     camera.start_recording(filename)
     pir.wait_for_no_motion()
-	camera.stop_recording()
+    camera.stop_recording()
 ```
 --- /hint ---
 
