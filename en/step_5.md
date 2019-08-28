@@ -5,7 +5,7 @@ We're going to write some code to print out "Motion detected!" when the PIR sens
 1. Connect the power cable and boot up your Raspberry Pi.
 1. Open Mu, create a new file and save it as `parent-detector.py`.
 
-[[[mu-opening]]]
+[[[mu-open]]]
 
 1. Write some code to set up your PIR sensor on **GPIO 4**.
 
