@@ -61,4 +61,4 @@ while True:
 
 --- /hints ---
 
-Save your code, and run it by pressing `F5`. Test that the camera preview appears when the motion sensor is activated, and stops when the motion sensor is no longer active.
+Save your code, and run it. Test that the camera preview appears when the motion sensor is activated, and stops when the motion sensor is no longer active.
