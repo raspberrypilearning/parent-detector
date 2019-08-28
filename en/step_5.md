@@ -3,9 +3,9 @@
 We're going to write some code to print out "Motion detected!" when the PIR sensor detects movement.
 
 1. Connect the power cable and boot up your Raspberry Pi.
-1. Open IDLE, create a new file and save it as `parent-detector.py`.
+1. Open Mu, create a new file and save it as `parent-detector.py`.
 
-[[[rpi-gui-idle-opening]]]
+[[[mu-opening]]]
 
 1. Write some code to set up your PIR sensor on **GPIO 4**.
 
@@ -45,9 +45,9 @@ print("Motion detected!")
 
 --- /hints ---
 
-1. Save your code, and press `F5` to run it. You should see the words `Motion detected!` appear on the screen when the motion sensor is triggered.
+1. Save your code, and click on **Run** to run it. You should see the words `Motion detected!` appear on the screen when the motion sensor is triggered.
 
-1. At the moment your code only detects movement once and then the program ends. Put your code inside an **infinite loop** so that Python will keep waiting for a signal from the motion sensor and will print `Motion detected!` every time the sensor is triggered. To exit your program you can press `Ctrl + F6`.
+1. At the moment your code only detects movement once and then the program ends. Put your code inside an **infinite loop** so that Python will keep waiting for a signal from the motion sensor and will print `Motion detected!` every time the sensor is triggered. To exit your program you can click on **Stop**.
 
 [[[generic-python-while-true]]]
 
