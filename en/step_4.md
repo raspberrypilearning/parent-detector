@@ -3,7 +3,7 @@
 We're going to write some code to print out "Motion detected!" when the PIR sensor detects movement.
 
 --- task ---
-Open Mu, create a new file and save it as `parent-detector.py`.
+Open Mu, create a new file and save it as `parent_detector.py`.
 
 [[[mu-open]]]
 --- /task ---
@@ -19,11 +19,19 @@ You will need to use the `gpiozero` library to create a `MotionSensor` that is c
 --- hint ---
 Here is the full code:
 
-```python
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1
+highlight_lines: 
+---
 from gpiozero import MotionSensor
 
 pir = MotionSensor(4)
-```
+--- /code ---
+
 --- /hint ---
 --- /hints --
 --- /task ----
@@ -40,10 +48,22 @@ Look at the documentation for [GPIO Zero](https://gpiozero.readthedocs.io/en/sta
 --- hint ---
 Here is the code:
 
-```python
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 5,6
+---
+from gpiozero import MotionSensor
+
+pir = MotionSensor(4)
+
 pir.wait_for_motion()
 print("Motion detected!")
-```
+--- /code ---
+
 --- /hint ---
 
 --- /hints ---
@@ -69,12 +89,25 @@ while True:
 --- /hint ---
 
 --- hint ---
-You need to put these two lines of code inside an infinite loop:
+You need to put your code to detect motion, inside a loop.
 
-```python
-pir.wait_for_motion()
-print("Motion detected!")
-```
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 5,6,7
+---
+from gpiozero import MotionSensor
+
+pir = MotionSensor(4)
+
+while True:
+	pir.wait_for_motion()
+	print("Motion detected!")
+--- /code ---
+
 --- /hint ---
 
 --- /hints ---

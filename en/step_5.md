@@ -1,16 +1,30 @@
 ## Set up the camera preview
 
-1. At the start of your program, import the `Picamera` class from the `picamera` library so that we can use code to control the Camera Module.
+--- task ---
+At the start of your program, import the `Picamera` class from the `picamera` library so that we can use code to control the Camera Module.
 
-    ```python
-    from picamera import PiCamera
-    ```
+--- code ---
+---
+language: python
+filename: parent_dete
+line_numbers: 
+line_number_start: 
+highlight_lines: 
+---
+code
+--- /code ---
 
-1. Add a line of code to create a `PiCamera` object. Make sure this line of code is above the infinite loop.
+from picamera import PiCamera
+```
+--- /task ---
 
-    ```python
-    camera = PiCamera()
-    ```
+--- task ---
+Add a line of code to create a `PiCamera` object. Make sure this line of code is above the infinite loop.
+
+```python
+camera = PiCamera()
+```
+--- /task ---
 
 1. Add to your existing code to start the camera preview when the sensor is activated and stop the preview when no motion is detected.
 
