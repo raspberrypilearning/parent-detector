@@ -26,19 +26,6 @@ You will need to use the `gpiozero` library to create a `MotionSensor` that is c
 
 Here is the full code:
 
---- code ---
----
-language: python
-filename: parent_detector.py
-line_numbers: true
-line_number_start: 1
-highlight_lines: 
----
-from gpiozero import MotionSensor
-
-pir = MotionSensor(4)
-
---- /code ---
 
 --- /hint ---
 
