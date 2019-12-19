@@ -1,73 +1,121 @@
-## Test the PIR motion sensor
+## Set up the camera preview
 
-We're going to write some code to print out "Motion detected!" when the PIR sensor detects movement.
+--- task ---
+At the start of your program, import the `Picamera` class from the `picamera` library so that we can use code to control the Camera Module.
 
-1. Connect the power cable and boot up your Raspberry Pi.
-1. Open Mu, create a new file and save it as `parent-detector.py`.
-
-[[[mu-open]]]
-
-1. Write some code to set up your PIR sensor on **GPIO 4**.
-
---- hints ---
-
---- hint ---
-You will need to use the `gpiozero` library to create a `MotionSensor` that is connected to the correct GPIO pin.
---- /hint ---
-
---- hint ---
-Here is the full code:
-
-```python
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 2
+---
 from gpiozero import MotionSensor
+from picamera import PiCamera
 
 pir = MotionSensor(4)
-```
---- /hint ---
---- /hints ---
 
-1. Add some more code so that when the PIR sensor detects motion, "Motion detected!" is displayed on the screen.
-
---- hints ---
-
---- hint ---
-Look at the documentation for [GPIO Zero](https://gpiozero.readthedocs.io/en/stable/api_input.html#motion-sensor-d-sun-pir) to find out how to use the `wait_for_motion()` method.
---- /hint ---
-
---- hint ---
-Here is the code:
-
-```python
-pir.wait_for_motion()
-print("Motion detected!")
-```
---- /hint ---
-
---- /hints ---
-
-1. Save your code, and click on **Run** to run it. You should see the words `Motion detected!` appear on the screen when the motion sensor is triggered.
-
-1. At the moment your code only detects movement once and then the program ends. Put your code inside an **infinite loop** so that Python will keep waiting for a signal from the motion sensor and will print `Motion detected!` every time the sensor is triggered. To exit your program you can click on **Stop**.
-
-[[[generic-python-while-true]]]
-
---- hints ---
-
---- hint ---
-The code for an infinite loop is shown below. Any lines of code to be repeated should be __indented__ within the loop.
-
-```python
 while True:
+	pir.wait_for_motion()
+	print("Motion detected!")
+
+--- /code ---
+
+--- /task ---
+
+--- task ---
+Add a line of code to create a `PiCamera` object. Make sure this line of code is above the infinite loop.
+
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 2
+---
+from gpiozero import MotionSensor
+from picamera import PiCamera
+
+pir = MotionSensor(4)
+camera = PiCamera()
+
+while True:
+	pir.wait_for_motion()
+	print("Motion detected!")
+
+--- /code ---
+
+--- /task ---
+
+--- task ---
+Add to your existing code so that it starts the camera preview when the sensor is activated and stop the preview when no motion is detected.
+--- /task ---
+
+[[[rpi-picamera-take-photo]]]
+
+--- hints ---
+
+--- hint ---
+Make sure that the code you add to start the camera preview is __indented__ so that Python knows it is inside the loop.
+--- /hint ---
+
+--- hint ---
+The code to begin the camera preview is as follows. Can you work out the code to stop the preview?
+```python
+camera.start_preview()
 ```
 --- /hint ---
 
 --- hint ---
-You need to put these two lines of code inside an infinite loop:
-
+Shown below is the code to tell the sensor to wait for motion to be detected. Can you work out the code telling the sensor to wait for no motion to be detected?
 ```python
 pir.wait_for_motion()
-print("Motion detected!")
 ```
 --- /hint ---
 
+--- hint ---
+Here are the lines of code you will need, but they are not in the right order.
+
+```python
+pir.wait_for_motion()
+pir.wait_for_no_motion()
+camera.start_preview()
+camera.stop_preview()
+```
+--- /hint ---
+
+--- hint ---
+Here is the finished code:
+
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 10,11,12
+---
+from gpiozero import MotionSensor
+from picamera import PiCamera
+
+pir = MotionSensor(4)
+camera = PiCamera()
+
+while True:
+	pir.wait_for_motion()
+	print("Motion detected!")
+    camera.start_preview()
+    pir.wait_for_no_motion()
+    camera.stop_preview()
+--- /code ---
+
+--- /hint ---
+
 --- /hints ---
+
+--- task ---
+Save your code, and run it. Test that the camera preview appears when the motion sensor is activated, and stops when the motion sensor is no longer active.
+--- /task ---
+
