@@ -88,6 +88,7 @@ camera.stop_preview()
 
 --- hint ---
 Here is the finished code:
+
 --- code ---
 ---
 language: python
