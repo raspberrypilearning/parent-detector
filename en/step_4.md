@@ -14,6 +14,10 @@ Open Mu, create a new file and save it as `parent_detector.py`.
 
 Set up your PIR sensor on **GPIO 4**.
 
+
+
+--- /task ----
+
 --- hints ---
 
 --- hint ---
@@ -30,6 +34,3 @@ Here is the full code:
 --- /hint ---
 
 --- /hints --
-
---- /task ----
-
