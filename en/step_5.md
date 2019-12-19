@@ -6,28 +6,52 @@ At the start of your program, import the `Picamera` class from the `picamera` li
 --- code ---
 ---
 language: python
-filename: parent_dete
-line_numbers: 
-line_number_start: 
-highlight_lines: 
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 2
 ---
-code
+from gpiozero import MotionSensor
+from picamera import PiCamera
+
+pir = MotionSensor(4)
+
+while True:
+	pir.wait_for_motion()
+	print("Motion detected!")
+
 --- /code ---
 
-from picamera import PiCamera
-```
 --- /task ---
 
 --- task ---
 Add a line of code to create a `PiCamera` object. Make sure this line of code is above the infinite loop.
 
-```python
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 2
+---
+from gpiozero import MotionSensor
+from picamera import PiCamera
+
+pir = MotionSensor(4)
 camera = PiCamera()
-```
+
+while True:
+	pir.wait_for_motion()
+	print("Motion detected!")
+
+--- /code ---
+
 --- /task ---
 
-1. Add to your existing code to start the camera preview when the sensor is activated and stop the preview when no motion is detected.
-
+--- task ---
+Add to your existing code so that it starts the camera preview when the sensor is activated and stop the preview when no motion is detected.
+--- /task ---
 
 [[[rpi-picamera-take-photo]]]
 
@@ -53,6 +77,7 @@ pir.wait_for_motion()
 
 --- hint ---
 Here are the lines of code you will need, but they are not in the right order.
+
 ```python
 pir.wait_for_motion()
 pir.wait_for_no_motion()
@@ -63,16 +88,33 @@ camera.stop_preview()
 
 --- hint ---
 Here is the finished code:
-```python
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 10,11,12
+---
+from gpiozero import MotionSensor
+from picamera import PiCamera
+
+pir = MotionSensor(4)
+camera = PiCamera()
+
 while True:
-    pir.wait_for_motion()
-    print("Motion detected!")
+	pir.wait_for_motion()
+	print("Motion detected!")
     camera.start_preview()
     pir.wait_for_no_motion()
     camera.stop_preview()
-```
+--- /code ---
+
 --- /hint ---
 
 --- /hints ---
 
+--- task ---
 Save your code, and run it. Test that the camera preview appears when the motion sensor is activated, and stops when the motion sensor is no longer active.
+--- /task ---
+
