@@ -1,12 +1,17 @@
-## What you will need
+## Connect the PIR motion sensor
 
-As well as your Raspberry Pi and all its standard peripherals, you'll need:
+In this project, we are going to be using a **p**assive **i**nfra**r**ed (PIR) motion sensor.
 
-### Hardware
-- Raspberry Pi Camera Module
-- PIR motion sensor module (try [The Pi Hut](https://thepihut.com/products/pir-motion-sensor-module))
-- 3 or more female-to-female jumper wires (try [The Pi Hut](https://thepihut.com/products/adafruit-premium-female-female-jumper-wires-20-x-6-150mm))
+[[[rpi-theory-pir]]]
 
-### Extras
+--- task ---
+Connect your PIR sensor to **GPIO 4**.
+--- /task ---
 
-- Camera Board 360 Gooseneck Mount (from [modmypi.com](https://www.modmypi.com/raspberry-pi/camera/camera-cases/camera-board-360-gooseneck-mount)) or equivalent
+[[[rpi-gpio-connect-pir]]]
+
+--- task ---
+On the PIR module you should see two orange components with sockets that fit a Philips screwdriver (see above). These are called potentiometers: they allow you to adjust the sensitivity and the detection time of the sensor. You should begin by setting the sensitivity potentiometer to its maximum and the time potentiometer to its minimum. You can vary this later if you wish.
+
+![PIR potentiometers](images/pir_potentiometers.png)
+--- /task ---

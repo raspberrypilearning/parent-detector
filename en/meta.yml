@@ -17,7 +17,6 @@ version: 4.01
 last_tested: 2019-04-23
 steps: 
 - title: Introduction
-- title: What you will need
 - title: Connect the PIR sensor
 - title: Connect the camera
 - title: Test the PIR sensor
