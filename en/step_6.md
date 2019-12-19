@@ -2,21 +2,65 @@
 
 Seeing the intruder on the screen in a camera preview while they are in the room isn't much help to you. Instead, let's record a video of the intruder which you can view later on when you get home.
 
-1. Create a variable called `filename` inside your infinite loop to store the name of the video file.
+--- task ---
+Create a variable called `filename` inside your infinite loop to store the name of the video file.
 
-    ```python
-    filename = "intruder.h264"
-    ```
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 6
+---
+from gpiozero import MotionSensor
+from picamera import PiCamera
 
-    In case you are wondering, `.h264` is the video format.
+pir = MotionSensor(4)
+camera = PiCamera()
+filename = "intruder.h264"
 
-1. Find the line of code that starts the camera preview, and replace it with a line of code that starts a video recording.
+while True:
+	pir.wait_for_motion()
+	print("Motion detected!")
+    camera.start_preview()
+    pir.wait_for_no_motion()
+    camera.stop_preview()
+--- /code ---
 
-    ```python
-    camera.start_recording(filename)
-    ```
+In case you are wondering, `.h264` is the video format.
+--- /task ---
 
-1. Find the line of code stopping the camera preview, and replace it with a line of code stopping recording.
+--- task ---
+Find the line of code that starts the camera preview, and replace it with a line of code that starts a video recording.
+
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 11
+---
+from gpiozero import MotionSensor
+from picamera import PiCamera
+
+pir = MotionSensor(4)
+camera = PiCamera()
+filename = "intruder.h264"
+
+while True:
+	pir.wait_for_motion()
+	print("Motion detected!")
+    camera.start_recording(filename)	
+    pir.wait_for_no_motion()
+    camera.stop_preview()
+--- /code ---
+
+--- /task ---
+
+--- task ---
+Find the line of code stopping the camera preview, and replace it with a line of code stopping recording.
 
 --- hints ---
 
@@ -26,19 +70,37 @@ Look at the line of code you used to start recording, and see if you can use it 
 
 --- hint ---
 Here is the finished code:
-```python
+
+--- code ---
+---
+language: python
+filename: parent_detector.py
+line_numbers: true
+line_number_start: 1 
+highlight_lines: 11
+---
+from gpiozero import MotionSensor
+from picamera import PiCamera
+
+pir = MotionSensor(4)
+camera = PiCamera()
+filename = "intruder.h264"
+
 while True:
-    filename = "intruder.h264"
-    pir.wait_for_motion()
-    camera.start_recording(filename)
+	pir.wait_for_motion()
+	print("Motion detected!")
+    camera.start_recording(filename)	
     pir.wait_for_no_motion()
 	camera.stop_recording()
-```
+--- /code ---
+
 --- /hint ---
-
 --- /hints ---
+--- /task ---
 
-1. Save your program, and run it. Check that a file called `intruder.h264` appears in the same folder as your `parent-detector.py` file.
+--- task ---
+Save your program, and run it. Check that a file called `intruder.h264` appears in the same folder as your `parent-detector.py` file.
+--- /task ---
 
 --- challenge ---
 Every time a new intruder triggers the motion sensor, the video file will be overwritten. If you have lots of pesky parents or siblings intruding into your room, you want to keep videos of all of them. Can you write some code to automatically find out the current date and time, and add it to the name of the video file? Then each video you record will have a different filename.
