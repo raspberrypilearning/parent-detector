@@ -3,15 +3,19 @@
 We're going to write some code to print out "Motion detected!" when the PIR sensor detects movement.
 
 --- task ---
+
 Open Mu, create a new file and save it as `parent_detector.py`.
 
 [[[mu-open]]]
+
 --- /task ---
 
 --- task ---
+
 Set up your PIR sensor on **GPIO 4**.
 
 --- hints ---
+
 --- hint ---
 
 You will need to use the `gpiozero` library to create a `MotionSensor` that is connected to the correct GPIO pin.
@@ -49,6 +53,7 @@ Add some more code so that when the PIR sensor detects motion, "Motion detected!
 --- hints ---
 
 --- hint ---
+
 Look at the documentation for [GPIO Zero](https://gpiozero.readthedocs.io/en/stable/api_input.html#motion-sensor-d-sun-pir) to find out how to use the `wait_for_motion()` method.
 
 --- /hint ---
