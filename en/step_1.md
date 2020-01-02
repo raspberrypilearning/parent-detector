@@ -27,7 +27,7 @@ title: What you will need
 title: Additional information for educators
 ---
 
-If you need to print this project, please use the [printer-friendly version](https://projects.raspberrypi.org/en/projects/project-name/print){:target="_blank"}.
+If you need to print this project, please use the [printer-friendly version](https://projects.raspberrypi.org/en/projects/parent-detector/print){:target="_blank"}.
 
 You can [find the solution for this project here](http://rpf.io/p/en/parent-detector-get){:target="_blank"}.
 
