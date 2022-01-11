@@ -1,3 +1,4 @@
+---
 title: The parent detector
 hero_image: images/banner.png
 description: Detect intruders with a Raspberry Pi
@@ -15,12 +16,14 @@ software: python
 site_areas: projects
 version: 4.01
 last_tested: 2019-04-23
-steps: 
+steps:
 - title: Introduction
+  completion: engaged
 - title: Connect the PIR sensor
 - title: Connect the camera
 - title: Test the PIR sensor
 - title: Set up the camera preview
 - title: Record video to a file
 - title: Play video
-- title: "Challenge: stealth mode"
+  completion: internal
+- title: 'Challenge: stealth mode'
