@@ -18,12 +18,14 @@ version: 4.01
 last_tested: 2019-04-23
 steps:
 - title: Introduction
-  completion: engaged
 - title: Connect the PIR sensor
 - title: Connect the camera
+  completion:
+  - engaged
 - title: Test the PIR sensor
 - title: Set up the camera preview
 - title: Record video to a file
 - title: Play video
-  completion: internal
+  completion:
+  - internal
 - title: 'Challenge: stealth mode'
