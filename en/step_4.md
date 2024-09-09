@@ -29,7 +29,7 @@ Add some more code so that when the PIR sensor detects motion, "Motion detected!
 language: python
 line_numbers: true
 line_number_start: 1 
-highlight_lines: 4-5
+line_highlights: 4-5
 ---
 from gpiozero import MotionSensor
 
@@ -56,7 +56,7 @@ Add an **infinite loop** to keep checking for motion, then run your code again.
 language: python
 line_numbers: true
 line_number_start: 1 
-highlight_lines: 5-7
+line_highlights: 5-7
 ---
 from gpiozero import MotionSensor
 
