@@ -8,7 +8,6 @@ Use a Raspberry Pi to find out who's been in your room! Make a parent detector u
 ---
 title: What you will need
 ---
-## What you will need
 
 ### Hardware
 - A Raspberry Pi
