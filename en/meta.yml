@@ -25,7 +25,7 @@ steps:
 - title: Test the PIR sensor
 - title: Set up the camera preview
 - title: Record video to a file
-- title: Play video
   completion:
   - internal
-- title: 'Challenge: stealth mode'
+- title: Record multiple videos
+- title: What next?
