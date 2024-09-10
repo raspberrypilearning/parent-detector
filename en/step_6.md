@@ -10,7 +10,7 @@ Find the line of code that starts the camera preview, and replace it with a line
 language: python
 line_numbers: true
 line_number_start: 8
-highlight_lines: 11
+line_highlights: 11
 ---
 while True:
 	pir.wait_for_motion()
@@ -30,11 +30,11 @@ Find the line of code stopping the camera preview, and replace it with a line of
 language: python
 line_numbers: true
 line_number_start: 11
-highlight_lines: 13
+line_highlights: 13
 ---
     cam.start_recording("intruder.mp4")	
     pir.wait_for_no_motion()
-    cam.stop_preview()
+    cam.stop_recording()
 --- /code ---
 --- /task ---
 
