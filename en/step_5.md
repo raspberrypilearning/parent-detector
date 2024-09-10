@@ -27,7 +27,7 @@ line_number_start: 1
 line_highlights: 5
 ---
 from gpiozero import MotionSensor
-from picamera import PiCamera
+from picamzero import Camera
 
 pir = MotionSensor(4)
 cam = Camera()
@@ -47,7 +47,7 @@ line_number_start: 1
 line_highlights: 8-12
 ---
 from gpiozero import MotionSensor
-from picamera import Camera
+from picamzero import Camera
 
 pir = MotionSensor(4)
 cam = Camera()
