@@ -28,4 +28,6 @@ steps:
   completion:
   - internal
 - title: Record multiple videos
-- title: What next?
+- title: What can you do now?
+  completion:
+  - external
